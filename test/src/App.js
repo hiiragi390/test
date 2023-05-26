@@ -2,6 +2,7 @@ import './App.css';
 import db from "./firebase";
 import { useState,useEffect } from "react";
 import { doc, collection, getDocs, onSnapshot, addDoc } from "firebase/firestore";
+import { QFormat, InitialX } from './QFormat';
 
 function sendD(){
 
@@ -9,7 +10,7 @@ function sendD(){
         const postData = collection(db, "posts");
         addDoc(collection(db, "posts"),{
             title: "test",
-            text: "u-hu",
+            text: Math.floor(InitialX).toString(),
             num: 2
         }
         );
@@ -46,9 +47,14 @@ function App() {
     <div className="App">
       {posts.map((post) => (
         <div key={post.title}>
-          <h2>{post.title}</h2>
+          <h2>{post.text}</h2>
         </div>
       ))}
+      <div className="canvasWarp">
+        <QFormat />
+        <div className="backCanvas"></div>
+      </div>
+      
       <button onClick={sendD}>test</button>
     </div>
   );
